@@ -3,10 +3,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.time.LocalTime;
+import java.util.Objects;
+
 @RunWith(MockitoJUnitRunner.class)
 public class TransactionConverterTest extends TestCase {
 
     TransactionConverter transactionConverter = new TransactionConverter();
+
+    @Test
+    public void testSuccessfullTransactionParse() {
+        assertEquals(transactionConverter.convert("10:10:00,100,1"), new Transaction( LocalTime.of(10, 10, 0, 0), 100D, "1"));
+    }
 
     @Test
     public void testInvalidDateReturnsNull() {

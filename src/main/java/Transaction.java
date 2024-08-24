@@ -1,4 +1,5 @@
 import java.time.LocalTime;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Transaction {
@@ -15,6 +16,19 @@ public class Transaction {
         this.txnDate = txnDate;
         this.amount = amount;
         this.accountId = accountId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Transaction)) return false;
+        Transaction that = (Transaction) o;
+        return Double.compare(getAmount(), that.getAmount()) == 0 && Objects.equals(getTxnDate(), that.getTxnDate()) && Objects.equals(getAccountId(), that.getAccountId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTxnDate(), getAmount(), getAccountId());
     }
 
     public String getAccountId() {
