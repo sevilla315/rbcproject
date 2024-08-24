@@ -39,5 +39,19 @@ public class AccountServiceTest {
         verify(alertService, times(1)).raiseAlert(eq(2), anyString());
     }
 
+    @Test
+    public void testNoAlertsGenerated() throws Exception {
+        transactionReader.readFile("txn2.csv");
+        verify(alertService, times(0)).raiseAlert(eq(2), anyString());
+    }
+
+    @Test
+    public void testMultipleAlertsGenerated() throws Exception {
+        doNothing().when(alertService).raiseAlert(anyInt(), anyString());
+        transactionReader.readFile("txn3.csv");
+        verify(alertService, times(2)).raiseAlert(eq(2), anyString());
+    }
+
+
 
 }
