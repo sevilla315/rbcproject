@@ -1,0 +1,14 @@
+AcountService       class which drives all the updates, receives Tranlactions via TransactionListener
+Account             class for each account balance
+AccounPersistence   interface for persisting an Account to some medium
+IAlertService       interface to the Alerting service
+MsgConverter        interface to convert one message into another type
+SimpleAccountPersistence   implementation of AccountPersistence using jvm heap memory. It is thread safe
+Transaction         message object which represents an account update transaction
+TransactionConverter    a CSV String to Transaction MessageConverter implementation
+TransactionListener an interface which the AccountService implements, a callback when a transaction is received
+TransactionReader   a Reader which accepts a file on the classpath in csv format, 1 transaction per line, sand sends each to the AccountService
+
+AccountServiceTest  Junit which creates all required objects and wires them together (Spring/Guice in a real scenario),
+reads test files and sends/calls the AccountService with each successfully parse message. Test success will be when the expectwed number of
+raised alerts is equal to the actual calls to the alerter
