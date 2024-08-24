@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Transaction {
 
-    private final AtomicInteger transactionIdSeed = new AtomicInteger();
+    private static final AtomicInteger transactionIdSeed = new AtomicInteger();
 
     private final String transactionId;
     private final LocalTime txnDate;
